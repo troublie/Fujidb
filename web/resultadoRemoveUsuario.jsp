@@ -20,7 +20,7 @@
         <%}%>
 
         <%if (!res) {%>
-        <p> Erro ao remover Usuário! </p>
+        <p> Usuário não encontrado! </p>
         <%}%>
     </body>
 </html>

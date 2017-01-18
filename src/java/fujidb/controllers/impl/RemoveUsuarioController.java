@@ -20,8 +20,8 @@ public class RemoveUsuarioController extends AbstractController {
 
     @Override
     public void execute() {
+        boolean res = false;
         try {
-            boolean res = false;
             UsuarioDAO usuario = getUsuarioDAO();
             int id = Integer.parseInt(this.getRequest().getParameter("idRem"));
             usuario.removeUsuario(id);
@@ -30,6 +30,9 @@ public class RemoveUsuarioController extends AbstractController {
             this.getRequest().setAttribute("idRem", res);
         } catch (UsuarioNaoEncontradoException ex) {
             Logger.getLogger(RemoveUsuarioController.class.getName()).log(Level.SEVERE, null, ex);
+            res = false;
+            this.setReturnPage("/resultadoRemoveUsuario.jsp");
+            this.getRequest().setAttribute("idRem", res);
         }
     }
 }
