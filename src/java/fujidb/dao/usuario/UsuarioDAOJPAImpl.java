@@ -69,6 +69,29 @@ public class UsuarioDAOJPAImpl implements UsuarioDAO {
         emf.close();
         return result;
     }
+    
+    @Override
+    public Usuario buscaUsuarioPorEmail(final String email) {
+        Usuario result = null;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FujidbPU");
+        EntityManager em = emf.createEntityManager();
+        CriteriaBuilder builder = em.getCriteriaBuilder();
+        CriteriaQuery<Usuario> criteria = builder.createQuery(Usuario.class);
+        Root<Usuario> from = criteria.from(Usuario.class);
+        criteria.select(from);
+        criteria.where(builder.equal(from.get("email"), email));
+        TypedQuery<Usuario> typed = em.createQuery(criteria);
+        try {
+            result = typed.getSingleResult();
+        } catch (final NoResultException ex) {
+            log.error(ex);
+            //throw new DAORuntimeException(ex);
+        }
+        em.clear();
+        em.close();
+        emf.close();
+        return result;
+    }
 
     @Override
     public void removeUsuario(final int id)

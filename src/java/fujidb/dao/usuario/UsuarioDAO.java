@@ -26,7 +26,9 @@ public interface UsuarioDAO {
     public Usuario criaUsuario(Departamento depto, String nome, String sobrenome, String email, String senha);
 
     public void updateUsuario(int id, Departamento depto, String nome, String sobrenome, String email) throws UsuarioNaoEncontradoException;
-
+    
+    public Usuario buscaUsuarioPorEmail(final String email);
+            
     public void close();
 
     public boolean isClosed();
