@@ -69,7 +69,7 @@ public class UsuarioDAOJPAImpl implements UsuarioDAO {
         emf.close();
         return result;
     }
-    
+
     @Override
     public Usuario buscaUsuarioPorEmail(final String email) {
         Usuario result = null;
