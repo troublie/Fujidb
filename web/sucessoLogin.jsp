@@ -37,5 +37,7 @@
         <form action="LogoutServlet" method="post">
             <input type="submit" value="Logout" >
         </form>
+        <br>
+        <a href="index.html">Ir para principal</a>
     </body>
 </html>
