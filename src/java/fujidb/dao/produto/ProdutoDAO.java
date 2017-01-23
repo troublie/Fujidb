@@ -17,6 +17,8 @@ public interface ProdutoDAO {
     public Produto buscaProdutoPorId(int id) throws ProdutoNaoEncontradoException;
 
     public Produto buscaProdutoPorPartNumber(String partNumber);
+    
+    public Collection buscaProdutoPorPN(String partNumber);
 
     public Collection buscaTodosProdutos();
 

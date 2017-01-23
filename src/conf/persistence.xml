@@ -4,6 +4,7 @@
     <provider>org.hibernate.ejb.HibernatePersistence</provider>
     <class>fujidb.entities.Usuario</class>
     <class>fujidb.entities.Departamento</class>
+    <class>fujidb.entities.Produto</class>
     <exclude-unlisted-classes>false</exclude-unlisted-classes>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:derby://localhost:1527/FujiDB"/>

@@ -7,6 +7,7 @@ package fujidb.dao.produto;
 
 import fujidb.dao.exception.DAORuntimeException;
 import fujidb.entities.Produto;
+import fujidb.entities.Produto_;
 import java.util.*;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -52,7 +53,8 @@ public class ProdutoDAOJPAImpl implements ProdutoDAO {
         CriteriaQuery<Produto> criteria = builder.createQuery(Produto.class);
         Root<Produto> from = criteria.from(Produto.class);
         criteria.select(from);
-        criteria.where(builder.equal(from.get("part_number"), partNumber));
+        //criteria.where(builder.equal(from.get("partNumber"), partNumber));
+        criteria.where(builder.like(from.get("partNumber"), partNumber));
         TypedQuery<Produto> typed = em.createQuery(criteria);
         try {
             result = typed.getSingleResult();
@@ -63,6 +65,25 @@ public class ProdutoDAOJPAImpl implements ProdutoDAO {
         em.clear();
         em.close();
         emf.close();
+        return result;
+    }
+
+    @Override
+    public Collection<Produto> buscaProdutoPorPN(String partNumber) {
+        Collection result = null;
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("FujidbPU");
+        EntityManager em = emf.createEntityManager();
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Produto> criteria = cb.createQuery(Produto.class);
+        Root<Produto> root = criteria.from(Produto.class);
+        criteria.select(root);
+        criteria.where(cb.like(root.get(Produto_.partNumber), "%" + partNumber + "%"));
+        TypedQuery<Produto> typed = em.createQuery(criteria);
+        try {
+            result = typed.getResultList();
+        } catch (final NoResultException ex) {
+            log.error(ex);
+        }
         return result;
     }
 
@@ -121,8 +142,8 @@ public class ProdutoDAOJPAImpl implements ProdutoDAO {
     }
 
     @Override
-    public void updateProduto(int id, String partNumber, String partName, 
-            String partNameTrad, String ncm, String detalhes) 
+    public void updateProduto(int id, String partNumber, String partName,
+            String partNameTrad, String ncm, String detalhes)
             throws ProdutoNaoEncontradoException {
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FujidbPU");
         EntityManager em = emf.createEntityManager();
