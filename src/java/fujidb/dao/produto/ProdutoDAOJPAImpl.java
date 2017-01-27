@@ -70,7 +70,7 @@ public class ProdutoDAOJPAImpl implements ProdutoDAO {
 
     @Override
     public Collection<Produto> buscaProdutoPorPN(String partNumber) {
-        Collection result = null;
+        Collection <Produto> result = null;
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("FujidbPU");
         EntityManager em = emf.createEntityManager();
         CriteriaBuilder cb = em.getCriteriaBuilder();
