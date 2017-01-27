@@ -13,7 +13,7 @@
         <title>Resultado</title>
     </head>
     <body>
-        <h1>Resultado da busca pelo nome</h1>
+        <h1>Resultado</h1>
         <%
             Collection<Produto> produtos = (Collection<Produto>) request.getAttribute("pn");
 

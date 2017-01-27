@@ -31,6 +31,6 @@
             Remarks:<br>
             <input type="text" name="details" value="<%=request.getParameter("details") %>">
             <br>
-            <button type="submit" value="Submit">Submit</button>
+            <button type="submit" value="Submit">Atualizar</button>
     </body>
 </html>
